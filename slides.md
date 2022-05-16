@@ -14,25 +14,13 @@ drawings:
 title: Welcome to Slidev
 ---
 
-# Welcome to Slidev
+# Time Series Anomaly Detection In ICLR-22
 
-Presentation slides for developers
+Xiaoshun Yao
 
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
+Data Mining Lab, UESTC
 
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
-    class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
+yaoxs@std.uestc.edu.cn
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
@@ -40,22 +28,16 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 
-# What is Slidev?
+# Background
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+Unsupervised detection of anomaly points in time series is a challenging problem
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+Current paradigms:
+- density-estimation
+- clustering-based
+  - anomaly score formalized as the distance to cluster center
+- reconstruction-based
+- autoregression-based
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
@@ -76,7 +58,7 @@ h1 {
 
 ---
 
-# Navigation
+# Anomaly Transformer
 
 Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
 
@@ -90,12 +72,7 @@ Hover on the bottom-left corner to see the navigation's controls panel, [learn m
 | <kbd>down</kbd> | next slide |
 
 <!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+<p class="absolute bottom-0 left-3">Anomaly Transformer: Time Series Anomaly Detection with Association Discrepancy, ICLR'22</p>
 
 ---
 layout: image-right
