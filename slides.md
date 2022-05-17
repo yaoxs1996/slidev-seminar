@@ -32,12 +32,20 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 Unsupervised detection of anomaly points in time series is a challenging problem
 
-Current paradigms:
+### Current paradigms:
+
 - density-estimation
 - clustering-based
   - anomaly score formalized as the distance to cluster center
 - reconstruction-based
 - autoregression-based
+
+<br>
+
+### Drawbacks
+
+* focus on pointwise representation or pairwise association
+* insufficient to reason about the intricate dynamics
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
@@ -55,6 +63,15 @@ h1 {
   -moz-text-fill-color: transparent;
 }
 </style>
+
+---
+
+# Question Formalization
+
+* Time series $\mathcal{X}=\{x_1,x_2,\cdots,x_N\}$
+* $x_t \in \mathbb{R}^d$ represents the observation of time $t$
+* Unsupervised time series anomaly detection
+    + whether $x_t$ is anomalous or not without labels
 
 ---
 
