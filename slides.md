@@ -66,12 +66,74 @@ h1 {
 
 ---
 
+# Background
+
+Anomalies are rare and hidden by vast normal points
+
+* classic methods: density-estimation, clustering-based
+  + ignore temporal information
+  + difficult to generalize to unseen real scenarios
+* deep models: learning pointwise representations
+  + rarity of anomalies: pointwise representation is less informative
+  + vast normal time point: less distinguishable
+  + pointwise cannot provide a comprehensive description of the temporal context
+* explicit association modeling: GNNs, subsequence-based
+  + single time point is insufficient for complex temporal patterns
+  + cannot capture the fine-grained temporal association between time point and series
+
+<!--
+深度模型基于重构误差与自回归预测  
+基于子序列到的模型无法捕获细粒度
+-->
+
+---
+
 # Question Formalization
 
 * Time series $\mathcal{X}=\{x_1,x_2,\cdots,x_N\}$
 * $x_t \in \mathbb{R}^d$ represents the observation of time $t$
 * Unsupervised time series anomaly detection
     + whether $x_t$ is anomalous or not without labels
+
+---
+
+# Motivation
+
+Adapt Transformer to time series anomaly detection in the unsupervised regime
+
+* temporal association of each time point can be obtained from the self-attention map
+  + describe temporal context and indicate dynamic patterns
+* rarity of anomalies and the dominance of normal patterns
+  + anomalies is hard to build strong associations with the whole series
+  + the adjacent of anomalies shall contains similar abnormal patterns
+  + normal time points is highly associate with whole series
+
+<!--
+得益于Transformer在全局表征和长距离关联上的统一模型  
+-->
+
+---
+
+# Association Discrepancy
+
+utilize the inherent normal-abnormal distinguishability of the association distribution
+
+quantified by Association Discrepancy: the distance between each time point's:
+
+* prior-assocication
+* series-association
+
+### Anomaly-Attention
+
+a two-brach self-attention models the prior-association and series-association
+
+* prior-association: learnable Gaussian kernel
+* series-association: self-attention weights learned form raw series
+* minimax strategy: amplify the normal-abnormal distinguishability
+
+<!--
+异常点的关联差异应该更小  
+-->
 
 ---
 
