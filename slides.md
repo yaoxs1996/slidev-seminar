@@ -175,6 +175,27 @@ $$
 
 # Anomaly-Attention
 
+Anomaly-Attention with a two-branch structure
+
+### prior-association
+
+* learnable Gaussian kernel calculate temporal distance
+* Gaussian kernel can pay more attention to adjancent horizon
+* a learnable scale paramter $\sigma$ adapt to the various time series patterns
+
+### series-association
+
+* find effective association adaptive from raw series
+
+<br>
+<br>
+
+these two forms:
+
+* all maintain temporal dependacies
+* reflect the adjacent-concentration prior
+* learned association
+
 ---
 
 # Components
