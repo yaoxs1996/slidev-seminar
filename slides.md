@@ -139,19 +139,41 @@ a two-brach self-attention models the prior-association and series-association
 
 # Anomaly Transformer
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
+### Overall Architecture
 
-### Keyboard Shortcuts
+<!-- ![overall architechture](/imgs/overall.svg  "Overall Architechture") -->
+<img 
+  src="/imgs/overall.svg"
+  class="m-25 h-55 rounded shadow"
+/>
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
 <p class="absolute bottom-0 left-3">Anomaly Transformer: Time Series Anomaly Detection with Association Discrepancy, ICLR'22</p>
+
+---
+
+# Anomaly Transformer
+
+### Overall Architechture
+
+stacking structure is conductive to learning underlying association
+
+$L$ layers model and input $\mathcal{X}\in \mathbb{R}^{N\times d}$, for $l$-th layer:
+
+$$
+\begin{aligned}
+\mathcal{Z}^l&=\text{Layer-Norm}(\text{Anomaly-Attention}(\mathcal{X}^{l-1})+\mathcal{X}^{l-1})  \\
+\mathcal{X}^l &= \text{Layer-Norm}(\text{Feed-Forward}(\mathcal{Z}^l)+\mathcal{Z}^l)
+\end{aligned}
+$$
+
+* $\mathcal{X}^l\in \mathbb{R}^{N\times d_{model}}$, output with $d_{model}$ channels
+* $\mathcal{X}^0=\text{Embedding}(\mathcal{X})$
+* $\mathcal{Z}^l\in \mathbb{R}^{N\times d_{model}}$ is hidden representation
+* $\text{Anomaly-Attention}(\cdot)$ computer association discrepancy
+
+---
+
+# Anomaly-Attention
 
 ---
 layout: image-right
