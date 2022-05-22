@@ -198,6 +198,50 @@ these two forms:
 
 ---
 
+# Anomaly-Attention
+
+<p>the Anomaly-Attention in the <i>l</i>-th layer:</p>
+
+$$
+\begin{aligned}
+\text{Initialization}&: Q,K,V,\sigma = X^{l-1}W_Q^l,X^{l-1}W_K^l,X^{l-1}W_V^l,X^{l-1}W_\sigma^l \\
+\text{Prior-Association}&: P^l=\text{Rescale}\lparen[\frac{1}{\sqrt{2\pi}\sigma_i}\exp{-\frac{|j-i|^2}{2\sigma_i^2}}]_{i,j\in \{1,\cdots,N\}}\rparen \\
+\text{Series-Association}&: \text{Softmax}(\frac{QK^T}{\sqrt{d_{model}}}) \\
+\text{Reconstruction}&: \hat{Z}^l=S^lV
+\end{aligned}
+$$
+
+---
+
+# Association Discrepancy
+
+the symmetrized KL divergence between prior- and series-associations
+
+* average the association discrepancy from multiple layers
+* combine the associations from multi-level features into one
+
+$$
+\text{AssDis}(P,S;X)=[\frac{1}{L}\sum^L_{l=1}(\text{KL}(P_{i,:}^l\Vert S_{i,:}^l)+\text{KL}(S_{i,:}^l\Vert P_{i,:}^l))]_{i=1,\cdots,N}
+$$
+
+* $\text{KL}(\cdot \| \cdot)$ computed between every row of $P^l$ and $S^l$
+* $\text{AssDis}(P,S;X)\in \R^{N\times 1}$ is the point-wise association discrepancy of $X$
+* $i$-th element of AssDis is the $i$-th time point of $X$
+
+<!-- 异常点的AssDis分数应当小于正常时间点 -->
+
+---
+
+# Minimax Association Learning
+
+employ the reconstruction loss for optimizing model
+
+$$
+\mathcal{L}_{Total}(\hat{X},P,S,\lambda;X)=\|X-\hat{X}\|_F^2-\lambda\times \|\text{AssDis}(P,S;X)\|_1
+$$
+
+---
+
 # Components
 
 <div grid="~ cols-2 gap-4">
