@@ -240,6 +240,27 @@ $$
 \mathcal{L}_{Total}(\hat{X},P,S,\lambda;X)=\|X-\hat{X}\|_F^2-\lambda\times \|\text{AssDis}(P,S;X)\|_1
 $$
 
+* $\hat{X}\in \R^{N\times d}$ is the reconstruction of $X$
+* when $\lambda>0$, optimization is to enlarge the association discrepacy
+
+---
+
+# Minimax Association Learning
+
+minimax strategy is proposed to make the association discrepancy more distinguishable
+
+### Minimax Strategy
+
+* minimize phase
+* maximize phase
+
+$$
+\begin{aligned}
+\text{Minimize Phase}&: \mathcal{L}_{Total}(\hat{X},P,S_{detach},-\lambda;X) \\
+\text{Maximize Phase}&: \mathcal{L}_{Total}(\hat{X},P_{detach},S,\lambda;X)
+\end{aligned}
+$$
+
 ---
 
 # Components
