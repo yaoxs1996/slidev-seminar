@@ -252,7 +252,11 @@ minimax strategy is proposed to make the association discrepancy more distinguis
 ### Minimax Strategy
 
 * minimize phase
+  + drive the prior-association $P^l$ to approximate the series-association $S^l$
+  + make $P^l$ adapt to various temporal patterns
 * maximize phase
+  + optimize the series-association to enlarge the association discrepancy
+  + force the series-association to pay more attention to the non-adjacent horizon
 
 $$
 \begin{aligned}
@@ -261,158 +265,36 @@ $$
 \end{aligned}
 $$
 
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
+<!--
+序列关联是从原始序列中学习获得的
+-->
 
 ---
 
-# LaTeX
+# Minimax Association Learning
 
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
+### Minimax Strategy
 
-<br>
+<img 
+  src="/imgs/minimax.svg"
+  class="m-25 h-55 rounded shadow"
+/>
 
-Inline $\sqrt{3x-1}+(1+x)^2$
+---
 
-Block
+# Minimax Association Learning
+
+### Association-based Anomaly Criterion
+
+* incorporate the normalized association discrepancy
+* final anomaly score of $X\in \R^{N\times d}$ is
+
 $$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
+\text{AnomalyScore}(X)=\text{Softmax}(-\text{AssDis}(P,S,X))\odot [\|X_{i,:}-\hat{X}_{i,:}\|_2^2]_{i=1,\cdots,N}
 $$
 
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.5}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
+* $\odot$ is the element-wise multiplication
+* $\text{AnomalyScore}(X)\in \R^{N\times 1}$ denotes the point-wise anomaly criterion of $X$
 
 ---
 layout: center
