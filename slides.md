@@ -50,7 +50,7 @@ yaoxs@std.uestc.edu.cn
 
 <img 
   src="/imgs/multivariate-graph.png"
-  class="h-70 ml-30 rounded shadow"
+  class="h-70 ml-30"
 />
 
 ---
@@ -260,27 +260,35 @@ $$
 
 # Minimax Association Learning
 
-employ the reconstruction loss for optimizing model
+<br>
+<br>
+<br>
+<br>
+
+Employ the reconstruction loss for optimizing model
 
 $$
 \mathcal{L}_{Total}(\hat{X},P,S,\lambda;X)=\|X-\hat{X}\|_F^2-\lambda\times \|\text{AssDis}(P,S;X)\|_1
 $$
 
 * $\hat{X}\in \R^{N\times d}$ is the reconstruction of $X$
-* when $\lambda>0$, optimization is to enlarge the association discrepacy
+* When $\lambda>0$, optimization is to enlarge the association discrepacy
 
 ---
 
 # Minimax Association Learning
 
-minimax strategy is proposed to make the association discrepancy more distinguishable
+Minimax strategy is proposed to make the association discrepancy more distinguishable
+
+<br>
+<br>
 
 ### Minimax Strategy
 
-* minimize phase
+* Minimize phase
   + drive the prior-association $P^l$ to approximate the series-association $S^l$
   + make $P^l$ adapt to various temporal patterns
-* maximize phase
+* Maximize phase
   + optimize the series-association to enlarge the association discrepancy
   + force the series-association to pay more attention to the non-adjacent horizon
 
@@ -303,17 +311,22 @@ $$
 
 <img 
   src="/imgs/minimax.svg"
-  class="w-180 m-20 rounded shadow"
+  class="w-180 m-20"
 />
 
 ---
 
 # Minimax Association Learning
 
+<br>
+<br>
+<br>
+<br>
+
 ### Association-based Anomaly Criterion
 
-* incorporate the normalized association discrepancy
-* final anomaly score of $X\in \R^{N\times d}$ is
+* Incorporate the normalized association discrepancy
+* Final anomaly score of $X\in \R^{N\times d}$ is
 
 $$
 \text{AnomalyScore}(X)=\text{Softmax}(-\text{AssDis}(P,S,X))\odot [\|X_{i,:}-\hat{X}_{i,:}\|_2^2]_{i=1,\cdots,N}
@@ -326,12 +339,18 @@ $$
 
 # Experiments
 
-* a non-overlapped sliding window to obtain a set of sub-series
+<br>
+<br>
+<br>
+<br>
+<br>
+
+* A non-overlapped sliding window to obtain a set of sub-series
   + a fixed size of 100 for all datasets
-* label anomalies if anomaly scores are larger than threshold $\delta$
+* Label anomalies if anomaly scores are larger than threshold $\delta$
   + $\delta$ is determined to make a proportion $r$ of time points of the validation dataset labeled as anomalies
   + $r=0.1\%$ for SWaT, $0.5\%$ for SMD and $1\%$ for other datasets
-* if a time point in a certain successive abnormal segment is detected, all anomalies in this abnormal segment are viewed to be correctly detected
+* If a time point in a certain successive abnormal segment is detected, all anomalies in this abnormal segment are viewed to be correctly detected
 
 ---
 
@@ -341,12 +360,23 @@ $$
 
 <img 
   src="/imgs/result.svg"
-  class="w-130 ml-30"
+  class="w-170 ml-25"
 />
+
+---
+
+# Experimants
+
+<br>
+<br>
+<br>
+<br>
+
+### ROC
 
 <img 
   src="/imgs/roc.svg"
-  class="w-130 ml-30"
+  class="w-260"
 />
 
 ---
