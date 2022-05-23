@@ -14,7 +14,7 @@ drawings:
 title: Welcome to Slidev
 ---
 
-# Time Series Anomaly Detection In ICLR-22
+# Time Series Anomaly Detection With Association Discrepancy
 
 Xiaoshun Yao
 
