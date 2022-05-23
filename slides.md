@@ -28,6 +28,31 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 
+# Unsupervised Time Series Anomaly Detection
+
+* real-world systems monitored by multi-sensors
+* discovering the malfunctions is quite meaningful for
+  + ensuring security
+  + avoiding financial loss
+* but anomalies are usually rare and hidden by vast normal points
+  + data labeling hard and expensive
+
+---
+
+# Question Formalization
+
+* Time series $\mathcal{X}=\{x_1,x_2,\cdots,x_N\}$
+* $x_t \in \mathbb{R}^d$ represents the observation of time $t$
+* Unsupervised time series anomaly detection
+    + whether $x_t$ is anomalous or not without labels
+
+<img 
+  src="/imgs/multivariate-graph.png"
+  class="h-70 ml-30 rounded shadow"
+/>
+
+---
+
 # Background
 
 Unsupervised detection of anomaly points in time series is a challenging problem
@@ -52,18 +77,6 @@ You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/guide/syntax#embedded-styles
 -->
 
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
 ---
 
 # Background
@@ -85,15 +98,6 @@ Anomalies are rare and hidden by vast normal points
 深度模型基于重构误差与自回归预测  
 基于子序列到的模型无法捕获细粒度
 -->
-
----
-
-# Question Formalization
-
-* Time series $\mathcal{X}=\{x_1,x_2,\cdots,x_N\}$
-* $x_t \in \mathbb{R}^d$ represents the observation of time $t$
-* Unsupervised time series anomaly detection
-    + whether $x_t$ is anomalous or not without labels
 
 ---
 
