@@ -144,10 +144,17 @@ a two-brach self-attention models the prior-association and series-association
 <!-- ![overall architechture](/imgs/overall.svg  "Overall Architechture") -->
 <img 
   src="/imgs/overall.svg"
-  class="m-25 h-55 rounded shadow"
+  class="h-80 m-5 rounded shadow"
 />
 
 <p class="absolute bottom-0 left-3">Anomaly Transformer: Time Series Anomaly Detection with Association Discrepancy, ICLR'22</p>
+
+<!--
+m: margin  
+h: height
+w: width  
+https://bootstrap-vue.org/docs/reference/spacing-classes
+-->
 
 ---
 
@@ -277,7 +284,7 @@ $$
 
 <img 
   src="/imgs/minimax.svg"
-  class="m-25 h-55 rounded shadow"
+  class="w-180 m-20 rounded shadow"
 />
 
 ---
