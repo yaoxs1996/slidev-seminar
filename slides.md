@@ -22,19 +22,21 @@ Data Mining Lab, UESTC
 
 yaoxs@std.uestc.edu.cn
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
 ---
 
 # Unsupervised Time Series Anomaly Detection
 
-* real-world systems monitored by multi-sensors
-* discovering the malfunctions is quite meaningful for
+<br>
+<br>
+<br>
+<br>
+<br>
+
+* Real-world systems monitored by multi-sensors
+* Discovering the malfunctions is quite meaningful for
   + ensuring security
   + avoiding financial loss
-* but anomalies are usually rare and hidden by vast normal points
+* But anomalies are usually <font color=#0000FF>__rare__</font> and hidden by <font color=#0000FF>__vast normal points__</font>
   + data labeling hard and expensive
 
 ---
@@ -59,23 +61,18 @@ Unsupervised detection of anomaly points in time series is a challenging problem
 
 ### Current paradigms:
 
-- density-estimation
-- clustering-based
+- Density-estimation
+- Clustering-based
   - anomaly score formalized as the distance to cluster center
-- reconstruction-based
-- autoregression-based
+- Reconstruction-based
+- Autoregression-based
 
 <br>
 
 ### Drawbacks
 
-* focus on pointwise representation or pairwise association
-* insufficient to reason about the intricate dynamics
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
+* Focus on pointwise representation or pairwise association
+* Insufficient to reason about the intricate dynamics
 
 ---
 
@@ -83,14 +80,14 @@ Learn more: https://sli.dev/guide/syntax#embedded-styles
 
 Anomalies are rare and hidden by vast normal points
 
-* classic methods: density-estimation, clustering-based
-  + ignore temporal information
+* Classic methods: density-estimation, clustering-based
+  + ignore <font color=#0000FF>__temporal information__</font>
   + difficult to generalize to unseen real scenarios
-* deep models: learning pointwise representations
+* Deep models: learning pointwise representations
   + rarity of anomalies: pointwise representation is less informative
   + vast normal time point: less distinguishable
-  + pointwise cannot provide a comprehensive description of the temporal context
-* explicit association modeling: GNNs, subsequence-based
+  + pointwise cannot provide a comprehensive description of the <font color=#0000FF>__temporal context__</font>
+* Explicit association modeling: GNNs, subsequence-based
   + single time point is insufficient for complex temporal patterns
   + cannot capture the fine-grained temporal association between time point and series
 
@@ -105,12 +102,18 @@ Anomalies are rare and hidden by vast normal points
 
 Adapt Transformer to time series anomaly detection in the unsupervised regime
 
-* temporal association of each time point can be obtained from the self-attention map
+<br>
+<br>
+<br>
+
+* Temporal association of each time point can be obtained from the self-attention map
   + describe temporal context and indicate dynamic patterns
-* rarity of anomalies and the dominance of normal patterns
+* Rarity of anomalies and the dominance of normal patterns
   + anomalies is hard to build strong associations with the whole series
-  + the adjacent of anomalies shall contains similar abnormal patterns
-  + normal time points is highly associate with whole series
+  + the adjacent of anomalies shall contains <font color=#0000FF>__similar abnormal patterns__</font>
+  + normal time points is <font color=#0000FF>__highly associate__</font> with whole series
+
+<p class="absolute bottom-0 left-3">Anomaly Transformer: Time Series Anomaly Detection with Association Discrepancy, ICLR'22</p>
 
 <!--
 得益于Transformer在全局表征和长距离关联上的统一模型  
@@ -120,20 +123,25 @@ Adapt Transformer to time series anomaly detection in the unsupervised regime
 
 # Association Discrepancy
 
-utilize the inherent normal-abnormal distinguishability of the association distribution
+Utilize the inherent normal-abnormal distinguishability of the association distribution
 
-quantified by Association Discrepancy: the distance between each time point's:
+<br>
 
-* prior-assocication
-* series-association
+Quantified by Association Discrepancy: the distance between each time point's:
+
+* Prior-assocication
+* Series-association
+
+<br>
+<br>
 
 ### Anomaly-Attention
 
-a two-brach self-attention models the prior-association and series-association
+A two-brach self-attention models the prior-association and series-association
 
-* prior-association: learnable Gaussian kernel
-* series-association: self-attention weights learned form raw series
-* minimax strategy: amplify the normal-abnormal distinguishability
+* Prior-association: learnable Gaussian kernel
+* Series-association: self-attention weights learned form raw series
+* Minimax strategy: amplify the normal-abnormal distinguishability
 
 <!--
 异常点的关联差异应该更小  
@@ -148,10 +156,8 @@ a two-brach self-attention models the prior-association and series-association
 <!-- ![overall architechture](/imgs/overall.svg  "Overall Architechture") -->
 <img 
   src="/imgs/overall.svg"
-  class="h-80 m-5 rounded shadow"
+  class="h-80 m-5"
 />
-
-<p class="absolute bottom-0 left-3">Anomaly Transformer: Time Series Anomaly Detection with Association Discrepancy, ICLR'22</p>
 
 <!--
 m: margin  
@@ -166,7 +172,7 @@ https://bootstrap-vue.org/docs/reference/spacing-classes
 
 ### Overall Architechture
 
-stacking structure is conductive to learning underlying association
+Stacking structure is conductive to learning underlying association
 
 $L$ layers model and input $\mathcal{X}\in \mathbb{R}^{N\times d}$, for $l$-th layer:
 
@@ -188,30 +194,36 @@ $$
 
 Anomaly-Attention with a two-branch structure
 
-### prior-association
+### Prior-association
 
-* learnable Gaussian kernel calculate temporal distance
+* Learnable Gaussian kernel calculate temporal distance
 * Gaussian kernel can pay more attention to adjancent horizon
-* a learnable scale paramter $\sigma$ adapt to the various time series patterns
-
-### series-association
-
-* find effective association adaptive from raw series
+* A learnable scale paramter $\sigma$ adapt to the various time series patterns
 
 <br>
 <br>
 
-these two forms:
+### Series-association
 
-* all maintain temporal dependacies
-* reflect the adjacent-concentration prior
-* learned association
+* Find effective association adaptive from raw series
+
+<br>
+
+These two forms:
+
+* All maintain temporal dependacies
+* Reflect the adjacent-concentration prior
+* Learned association
 
 ---
 
 # Anomaly-Attention
 
-<p>the Anomaly-Attention in the <i>l</i>-th layer:</p>
+<br>
+<br>
+<br>
+
+The Anomaly-Attention in the $l$-th layer:
 
 $$
 \begin{aligned}
@@ -226,10 +238,13 @@ $$
 
 # Association Discrepancy
 
-the symmetrized KL divergence between prior- and series-associations
+<br>
+<br>
 
-* average the association discrepancy from multiple layers
-* combine the associations from multi-level features into one
+The symmetrized KL divergence between prior- and series-associations
+
+* Average the association discrepancy from multiple layers
+* Combine the associations from multi-level features into one
 
 $$
 \text{AssDis}(P,S;X)=[\frac{1}{L}\sum^L_{l=1}(\text{KL}(P_{i,:}^l\Vert S_{i,:}^l)+\text{KL}(S_{i,:}^l\Vert P_{i,:}^l))]_{i=1,\cdots,N}
