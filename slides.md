@@ -156,8 +156,11 @@ A two-brach self-attention models the prior-association and series-association
 <!-- ![overall architechture](/imgs/overall.svg  "Overall Architechture") -->
 <img 
   src="/imgs/overall.svg"
-  class="h-80 m-5"
+  class="h-75 ml-10"
 />
+
+* model the prior- and series-association simultaneously
+* stop-gradient mechanism to constrain the prior- and series-associations
 
 <!--
 m: margin  
@@ -221,7 +224,6 @@ These two forms:
 
 <br>
 <br>
-<br>
 
 The Anomaly-Attention in the $l$-th layer:
 
@@ -229,10 +231,60 @@ $$
 \begin{aligned}
 \text{Initialization}&: Q,K,V,\sigma = X^{l-1}W_Q^l,X^{l-1}W_K^l,X^{l-1}W_V^l,X^{l-1}W_\sigma^l \\
 \text{Prior-Association}&: P^l=\text{Rescale}\lparen[\frac{1}{\sqrt{2\pi}\sigma_i}\exp{-\frac{|j-i|^2}{2\sigma_i^2}}]_{i,j\in \{1,\cdots,N\}}\rparen \\
-\text{Series-Association}&: \text{Softmax}(\frac{QK^T}{\sqrt{d_{model}}}) \\
+\text{Series-Association}&: S^l=\text{Softmax}(\frac{QK^T}{\sqrt{d_{model}}}) \\
 \text{Reconstruction}&: \hat{Z}^l=S^lV
 \end{aligned}
 $$
+
+$Q,K,V\in \R^{N\times d_{model}},\sigma \in \R^{N\times 1}$
+
+---
+
+# Anomaly-Attention
+
+### Prior-association
+
+$$
+P^l=\text{Rescale}\lparen[\frac{1}{\sqrt{2\pi}\sigma_i}\exp{-\frac{|j-i|^2}{2\sigma_i^2}}]_{i,j\in \{1,\cdots,N\}}\rparen
+$$
+
+* $P^l\in\R^{N\times N}$ is generated based on $\sigma\in\R^{N\times 1}$
+* $\sigma_i$ corresponds to the $i$-th time point
+* $i$-th time point's association weight to $j$-th: Guassian kernel $G(|j-i|;\sigma_i)$
+* $\text{Rescale}(\cdot)$ transform the association weights to discrete distributions $P^l$ by dividing the row sum
+
+<br>
+
+### Series-association
+
+$$
+S^l=\text{Softmax}(\frac{QK^T}{\sqrt{d_{model}}})
+$$
+
+* $S^l\in \R^{N \times N}$
+* $\Softmax(cdot)$ normalizes the attention map and each row of $S^l$ forms a discrete distribution
+
+---
+
+# Anomaly-Attention
+
+### Reconstruction
+
+$$
+\hat{Z}^l=S^lV
+$$
+
+* $\hat{Z}^l\in \R^{N\times d_{model}}$ is hidden representation after Anomaly-Attention in the $l$-th layer
+
+<br>
+<br>
+<br>
+
+### Multi-head version
+
+* learned scale $\sigma\in\R^{N\times h}$ for $h$ heads
+* $Q_m,K_m,V_m\in\R^{N\times \frac{d_{model}}{h}}$ of $m$-th head
+* multiple heads output $\{\hat{Z}^l_m\in\R^{\frac{d_{model}}{h}}\}_{1\leq m\leq h}$ concat and get final result $\hat{Z}^l\in\R^{N\times d_{model}}$
 
 ---
 
@@ -311,8 +363,21 @@ $$
 
 <img 
   src="/imgs/minimax.svg"
-  class="w-180 m-20"
+  class="w-200 ml-10"
 />
+
+<div grid="~ cols-2 gap-2" class="ml-10">
+<div>
+Minimize phase:
+
+* Prior-association minimize AssDis within the distribution family derived by Gaussian kernel
+</div>
+<div>
+Maximize phase:
+
+* Series-association maximize AssDis under the reconstruction loss
+</div>
+</div>
 
 ---
 
