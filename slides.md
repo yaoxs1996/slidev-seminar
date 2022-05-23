@@ -308,6 +308,33 @@ $$
 * $\text{AnomalyScore}(X)\in \R^{N\times 1}$ denotes the point-wise anomaly criterion of $X$
 
 ---
+
+# Experiments
+
+* a non-overlapped sliding window to obtain a set of sub-series
+  + a fixed size of 100 for all datasets
+* label anomalies if anomaly scores are larger than threshold $\delta$
+  + $\delta$ is determined to make a proportion $r$ of time points of the validation dataset labeled as anomalies
+  + $r=0.1\%$ for SWaT, $0.5\%$ for SMD and $1\%$ for other datasets
+* if a time point in a certain successive abnormal segment is detected, all anomalies in this abnormal segment are viewed to be correctly detected
+
+---
+
+# Experiments
+
+### Results
+
+<img 
+  src="/imgs/result.svg"
+  class="w-130 ml-30"
+/>
+
+<img 
+  src="/imgs/roc.svg"
+  class="w-130 ml-30"
+/>
+
+---
 layout: center
 class: text-center
 ---
