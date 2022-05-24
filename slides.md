@@ -262,7 +262,7 @@ S^l=\text{Softmax}(\frac{QK^T}{\sqrt{d_{model}}})
 $$
 
 * $S^l\in \R^{N \times N}$
-* $\Softmax(cdot)$ normalizes the attention map and each row of $S^l$ forms a discrete distribution
+* $\text{Softmax}(\cdot)$ normalizes the attention map and each row of $S^l$ forms a discrete distribution
 
 ---
 
